@@ -1,0 +1,1 @@
+<svg {{ $attributes->merge(['class' => $attributes->has('class') ? '' : 'h-4 w-4']) }} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-6.77 7.74L23.2 22h-6.23l-4.88-6.38L6.5 22H3.4l7.24-8.28L2.8 2h6.39l4.41 5.83L18.9 2zm-1.09 18.13h1.72L8.27 3.78H6.43l11.38 16.35z"/></svg>

@@ -1,0 +1,192 @@
+
+   PASS  Tests\Unit\BrandTokensTest
+  ✓ it keeps the official brand colours in the Tailwind theme                                                    0.35s  
+  ✓ it keeps the document numbering format agreed in the blueprint                                               0.03s  
+
+   PASS  Tests\Unit\ExampleTest
+  ✓ that true is true                                                                                            0.01s  
+
+   PASS  Tests\Unit\LeadStatusMachineTest
+  ✓ it allows only the transitions in the approved pipeline                                                      0.26s  
+  ✓ it throws rather than silently allowing an illegal move                                                      0.04s  
+  ✓ it records every status change as a system note                                                              0.05s  
+  ✓ it stamps closed_at and a reason when a lead is lost                                                         0.03s  
+
+   PASS  Tests\Feature\AdminTest
+  ✓ it sends guests to the admin sign-in page                                                                    0.44s  
+  ✓ it signs staff in and rejects wrong passwords                                                                0.58s  
+  ✓ it locks out after five failed attempts                                                                      1.34s  
+  ✓ it refuses deactivated accounts and accounts without a role                                                  0.57s  
+  ✓ it renders every admin screen for a Super Admin with ('/admin')                                              0.40s  
+  ✓ it renders every admin screen for a Super Admin with ('/admin/products')                                     0.38s  
+  ✓ it renders every admin screen for a Super Admin with ('/admin/products/create')                              0.42s  
+  ✓ it renders every admin screen for a Super Admin with ('/admin/categories')                                   0.40s  
+  ✓ it renders every admin screen for a Super Admin with ('/admin/projects')                                     0.37s  
+  ✓ it renders every admin screen for a Super Admin with ('/admin/projects/create')                              0.42s  
+  ✓ it renders every admin screen for a Super Admin with ('/admin/messages')                                     0.39s  
+  ✓ it renders every admin screen for a Super Admin with ('/admin/pages')                                        0.37s  
+  ✓ it renders every admin screen for a Super Admin with ('/admin/settings/contact')                             0.42s  
+  ✓ it renders every admin screen for a Super Admin with ('/admin/settings/social')                              0.49s  
+  ✓ it renders every admin screen for a Super Admin with ('/admin/users')                                        0.41s  
+  ✓ it renders every admin screen for a Super Admin with ('/admin/users/create')                                 0.41s  
+  ✓ it renders every admin screen for a Super Admin with ('/admin/account')                                      0.38s  
+  ✓ it renders every admin screen for a Super Admin with ('/admin/team')                                         0.40s  
+  ✓ it renders every admin screen for a Super Admin with ('/admin/team/create')                                  0.38s  
+  ✓ it renders every admin screen for a Super Admin with ('/admin/news')                                         0.46s  
+  ✓ it renders every admin screen for a Super Admin with ('/admin/news/create')                                  0.40s  
+  ✓ it creates a product that then appears in the shop                                                           0.47s  
+  ✓ it keeps an Inventory Manager out of settings and staff                                                      0.40s  
+  ✓ it saves settings and flushes the cache                                                                      0.37s  
+  ✓ it rejects an invalid email in settings                                                                      0.38s  
+  ✓ it marks a message read when it is opened                                                                    0.38s  
+  ✓ it will not demote the last Super Admin                                                                      0.37s  
+
+   PASS  Tests\Feature\BlockerFixesTest
+  ✓ it creates no user accounts from the main seeder                                                             0.62s  
+  ✓ it refuses to create the local admin outside APP_ENV=local                                                   0.37s  
+  ✓ it fails preflight when the site is not configured for production                                            0.35s  
+  ✓ it stores a disguised upload as a clean image with a safe extension                                          0.38s  
+  ✓ it rejects a file that is not really an image                                                                0.38s  
+  ✓ it rejects API writes from a deactivated account that still holds a token                                    0.38s  
+  ✓ it revokes API tokens when an admin deactivates someone                                                      0.40s  
+  ✓ it schedules the queue worker and the backups                                                                0.33s  
+  ✓ it backs up an SQLite database and keeps only the newest copies                                              3.41s  
+  ✓ it never brings back a category deleted in the admin                                                         0.34s  
+
+   PASS  Tests\Feature\ContactFormTest
+  ✓ it turns a contact message into a lead                                                                       0.19s  
+  ✓ it requires a real message, not one word                                                                     0.08s  
+  ✓ it renders the contact page without inventing contact details                                                0.10s  
+
+   PASS  Tests\Feature\ExampleTest
+  ✓ the application returns a successful response                                                                0.10s  
+
+   PASS  Tests\Feature\HardeningTest
+  ✓ it blocks a connection that tries many different accounts                                                    4.43s  
+  ✓ it defines site routes with controllers, not closures                                                        0.31s  
+  ✓ it strips scripts from page text, including slash-separated attributes with ('<p/onmouseover="alert(1)">hov</p>… 0.37s  
+  ✓ it strips scripts from page text, including slash-separated attributes with ('<a/href="javascript:alert(1)"</a>… 0.33s  
+  ✓ it strips scripts from page text, including slash-separated attributes with ('<a href="javascript:alert(1)"</a>… 0.35s  
+  ✓ it strips scripts from page text, including slash-separated attributes with ('<a href="jav ascript:ale…>z</a>')  0.33s  
+  ✓ it strips scripts from page text, including slash-separated attributes with ('<script>alert(1)</script><p>ok</p>')                   0.32s  
+  ✓ it keeps normal formatting and safe links                                                                    0.33s  
+  ✓ it sends at most one automatic reply per address per day                                                     0.45s  
+  ✓ it rejects a map address that is not a Google Maps embed                                                     0.38s  
+  ✓ it accepts a pasted Google Maps iframe and shows only its address                                            0.46s  
+  ✓ it moves a deleted product to Recently deleted and restores it                                               0.43s  
+  ✓ it gives a new product a fresh address while a deleted one still holds the old                               0.41s  
+  ✓ it restores a deleted message together with its lead                                                         0.39s  
+  ✓ it removes items for good 30 days after deletion                                                             0.35s  
+  ✓ it saves nothing if creating the lead fails                                                                  0.38s  
+  ✓ it never mixes one-line and block @php in the same template                                                  0.37s  
+
+   PASS  Tests\Feature\HomePageTest
+  ✓ it renders the homepage with the brand tagline                                                               0.11s  
+  ✓ it registers every route in the approved sitemap with ('home')                                               0.03s  
+  ✓ it registers every route in the approved sitemap with ('about')                                              0.03s  
+  ✓ it registers every route in the approved sitemap with ('contact')                                            0.03s  
+  ✓ it registers every route in the approved sitemap with ('quote')                                              0.03s  
+  ✓ it registers every route in the approved sitemap with ('services.index')                                     0.03s  
+  ✓ it registers every route in the approved sitemap with ('services.software')                                  0.03s  
+  ✓ it registers every route in the approved sitemap with ('services.networking')                                0.03s  
+  ✓ it registers every route in the approved sitemap with ('services.starlink')                                  0.03s  
+  ✓ it registers every route in the approved sitemap with ('portfolio.index')                                    0.03s  
+  ✓ it registers every route in the approved sitemap with ('projects.index')                                     0.03s  
+  ✓ it registers every route in the approved sitemap with ('insights.index')                                     0.03s  
+  ✓ it registers every route in the approved sitemap with ('shop.index')                                         0.03s  
+  ✓ it registers every route in the approved sitemap with ('cart')                                               0.03s  
+  ✓ it registers every route in the approved sitemap with ('checkout')                                           0.03s  
+  ✓ it registers every route in the approved sitemap with ('order.track')                                        0.03s  
+  ✓ it registers every route in the approved sitemap with ('search')                                             0.03s  
+  ✓ it registers every route in the approved sitemap with ('legal.privacy')                                      0.03s  
+  ✓ it registers every route in the approved sitemap with ('legal.terms')                                        0.03s  
+  ✓ it registers every route in the approved sitemap with ('legal.warranty')                                     0.03s  
+  ✓ it exposes a branded 404 page rather than the framework default                                              0.06s  
+
+   PASS  Tests\Feature\PortfolioTest
+  ✓ it lists every project on the portfolio page                                                                 0.09s  
+  ✓ it renders a case study                                                                                      0.07s  
+  ✓ it hides a live link that is switched off                                                                    0.07s  
+  ✓ it returns 404 for an unknown project                                                                        0.07s  
+  ✓ it shows Our Projects on the homepage once three exist                                                       0.11s  
+  ✓ it hides Our Projects when there are fewer than three                                                        0.11s  
+  ✓ it never brings back a project deleted in the admin                                                          0.07s  
+  ✓ it shows an empty portfolio when every project is deleted, not the starter content                           0.06s  
+
+   PASS  Tests\Feature\PublicPagesTest
+  ✓ it renders every Phase 2 page with ('home')                                                                  0.13s  
+  ✓ it renders every Phase 2 page with ('about')                                                                 0.08s  
+  ✓ it renders every Phase 2 page with ('services.index')                                                        0.08s  
+  ✓ it renders every Phase 2 page with ('contact')                                                               0.10s  
+  ✓ it renders every Phase 2 page with ('legal.privacy')                                                         0.09s  
+  ✓ it renders every Phase 2 page with ('legal.terms')                                                           0.09s  
+  ✓ it renders every Phase 2 page with ('legal.warranty')                                                        0.09s  
+  ✓ it sends the retired quote page to contact                                                                   0.06s  
+  ✓ it renders the homepage without an Our Projects block until there are case studies                           0.12s  
+  ✓ it survives a page record that does not exist yet                                                            0.10s  
+  ✓ it shows an empty state on a legal page with no body written                                                 0.09s  
+  ✓ it serves content from the database, not from the template                                                   0.09s  
+
+   PASS  Tests\Feature\QuoteRequestTest
+  ✓ it turns a quote submission into a lead with the right service                                               0.53s  
+  ✓ it pre-selects the service when arriving from a service page                                                 0.34s  
+  ✓ it notifies the sales team and acknowledges the customer                                                     0.44s  
+  ✓ it refuses to advance past step one without a description                                                    0.39s  
+  ✓ it silently discards a submission that trips the honeypot                                                    0.44s  
+  ✓ it discards a submission completed faster than a human could read it                                         0.44s  
+  ✓ it stores attachments on the private disk, never in public storage                                           0.53s  
+  ✓ it rejects an executable disguised as an attachment                                                          0.43s  
+  ✓ it no longer serves the quote page directly                                                                  0.38s  
+
+   PASS  Tests\Feature\SeoAndSecurityTest
+  ✓ it serves a sitemap listing products and projects                                                            0.11s  
+  ✓ it keeps non-production sites out of search engines                                                          0.06s  
+  ✓ it sends security headers                                                                                    0.15s  
+  ✓ it never caches admin pages                                                                                  0.05s  
+  ✓ it publishes valid organisation JSON-LD                                                                      0.31s  
+  ✓ it serves the public API                                                                                     0.08s  
+  ✓ it protects API writes                                                                                       0.06s  
+
+   PASS  Tests\Feature\SettingsTest
+  ✓ it treats a blank setting as absent so templates can hide the element                                        0.11s  
+  ✓ it hides every social icon until its URL is configured                                                       0.07s  
+  ✓ it builds a wa.me link with only digits                                                                      0.06s  
+  ✓ it flushes its cache when a setting changes                                                                  0.05s  
+
+   PASS  Tests\Feature\ShopTest
+  ✓ it shows an honest empty state when nothing is listed                                                        0.09s  
+  ✓ it hides unpublished products                                                                                0.10s  
+  ✓ it falls back to the contact page when no WhatsApp number is set                                             0.09s  
+  ✓ it opens WhatsApp with the product named and counts the tap                                                  0.09s  
+  ✓ it says price on request when prices are switched off                                                        0.09s  
+  ✓ it retires the checkout addresses with redirects                                                             0.05s  
+  ✓ it finds products in site search                                                                             0.08s  
+
+   PASS  Tests\Feature\TeamNewsServicesTest
+  ✓ it hides the team section until someone is added                                                             0.38s  
+  ✓ it shows visible team members on the About page with their position                                          0.37s  
+  ✓ it lets a Content Manager add a team member                                                                  0.35s  
+  ✓ it keeps Sales and Inventory staff out of team and news with ('Sales')                                       0.37s  
+  ✓ it keeps Sales and Inventory staff out of team and news with ('Inventory Manager')                           0.37s  
+  ✓ it only accepts a LinkedIn address for LinkedIn                                                              0.35s  
+  ✓ it publishes a post written in the admin                                                                     0.42s  
+  ✓ it keeps drafts and scheduled posts off the public site                                                      0.49s  
+  ✓ it shows the News link only once a post is live                                                              0.50s  
+  ✓ it strips unsafe markup from a post                                                                          0.38s  
+  ✓ it lists live posts in the sitemap and redirects old insights links                                          0.39s  
+  ✓ it publishes article structured data for a post                                                              0.36s  
+  ✓ it renders every service page, including CCTV & Intercom with ('/services/software-development', 'Software…  0.38s  
+  ✓ it renders every service page, including CCTV & Intercom with ('/services/it-networking', 'IT & Networking'… 0.37s  
+  ✓ it renders every service page, including CCTV & Intercom with ('/services/starlink', 'Starlink Solutions')   0.36s  
+  ✓ it renders every service page, including CCTV & Intercom with ('/services/cctv-intercom', 'CCTV & Intercom…  0.41s  
+  ✓ it lists CCTV & Intercom in the menu and on the homepage                                                     0.40s  
+  ✓ it adds the CCTV and intercom shop categories exactly once                                                   0.35s  
+
+  Tests:    151 passed (388 assertions)
+  Duration: 46.49s
+
+ 
+===== composer audit ===== 
+No security vulnerability advisories found.
+===== npm audit ===== 
+found 0 vulnerabilities

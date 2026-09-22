@@ -1,0 +1,657 @@
+/*
+|--------------------------------------------------------------------------
+| WestBridge Technologies — design tokens
+|--------------------------------------------------------------------------
+| Every brand value lives here and nowhere else. Templates reference tokens
+| (bg-navy-700, font-display, text-h2) — never a raw hex or px value.
+|
+| Navy #1C2B4F and Lime #89C726 are sampled from the official logo file.
+| Lime-700 (#4B7412) is the only green permitted for text: the brand lime
+| fails WCAG AA against white at body sizes.
+*/
+
+@import "tailwindcss";
+
+/* Self-hosted via Fontsource (npm). No third-party round trip, and no
+   dependency on a font host being reachable. Vite emits the woff2 files. */
+@import "@fontsource-variable/jost/index.css";
+@import "@fontsource/ibm-plex-sans/400.css";
+@import "@fontsource/ibm-plex-sans/500.css";
+@import "@fontsource/ibm-plex-sans/600.css";
+@import "@fontsource/ibm-plex-sans/700.css";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+
+@source "../views/**/*.blade.php";
+@source "../js/**/*.js";
+@source "../../app/**/*.php";
+
+@theme {
+  /* ---- Brand: navy ---- */
+  --color-navy-50:  #F2F4F8;
+  --color-navy-100: #E3E8F0;
+  --color-navy-200: #C7D0E0;
+  --color-navy-300: #9DAAC5;
+  --color-navy-400: #6B7CA0;
+  --color-navy-500: #3E5180;
+  --color-navy-600: #2A3C64;
+  --color-navy-700: #1C2B4F; /* OFFICIAL BRAND NAVY */
+  --color-navy-800: #16223E;
+  --color-navy-900: #101829;
+  --color-navy-950: #0A1019;
+
+  /* ---- Brand: lime ---- */
+  --color-lime-50:  #F4FAE9;
+  --color-lime-100: #E7F5CF;
+  --color-lime-200: #D0EBA2;
+  --color-lime-300: #B4DE6E;
+  --color-lime-400: #9FD24A;
+  --color-lime-500: #89C726; /* OFFICIAL BRAND LIME — surfaces & CTAs only */
+  --color-lime-600: #6FA31C;
+  --color-lime-700: #4B7412; /* the only lime allowed for text (AA on white) */
+  --color-lime-800: #3A5A11;
+  --color-lime-900: #2F4A12;
+
+  /* ---- Neutrals: grey biased green, never pure ---- */
+  --color-paper-50:  #FAFBF8;
+  --color-paper-100: #F5F7F2;
+  --color-paper-200: #EFF2EA;
+  --color-paper-300: #DCE1D6;
+  --color-paper-400: #C2CAB7;
+  --color-paper-500: #8B98AC;
+  --color-paper-600: #5C6A80;
+  --color-paper-700: #3D4859;
+  --color-paper-900: #0E1526;
+
+  /* ---- Semantic status: separate from the accent ---- */
+  --color-status-good: #2E7D4F;
+  --color-status-warn: #B26A00;
+  --color-status-crit: #B03A2E;
+
+  /* ---- Typography ---- */
+  --font-display: "Jost Variable", "Jost", "Century Gothic", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  --text-display: 3.5rem;      --text-display--line-height: 1.05;  --text-display--letter-spacing: -0.02em;
+  --text-h1: 2.5rem;           --text-h1--line-height: 1.12;       --text-h1--letter-spacing: -0.015em;
+  --text-h2: 1.875rem;         --text-h2--line-height: 1.2;
+  --text-h3: 1.3125rem;        --text-h3--line-height: 1.3;
+  --text-eyebrow: 0.75rem;     --text-eyebrow--line-height: 1.4;   --text-eyebrow--letter-spacing: 0.16em;
+  --text-body: 1.0625rem;      --text-body--line-height: 1.65;
+  --text-small: 0.875rem;      --text-small--line-height: 1.5;
+  --text-data: 0.875rem;       --text-data--line-height: 1.5;
+
+  /* ---- Rhythm ---- */
+  --spacing-section: 6rem;
+  --spacing-section-sm: 3.5rem;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+
+  /* ---- Elevation: two levels, no more ---- */
+  --shadow-header: 0 1px 0 rgb(28 43 79 / 0.08), 0 4px 16px -8px rgb(28 43 79 / 0.18);
+  --shadow-overlay: 0 12px 40px -12px rgb(28 43 79 / 0.28);
+
+  /* ---- Motion: one curve, two durations ---- */
+  --ease-brand: cubic-bezier(0.32, 0.72, 0.28, 1);
+}
+
+@layer base {
+  /*
+   | Alpine hides x-show elements only AFTER it boots. Until then the browser
+   | paints them, so the mega menus and the mobile drawer flash over the page.
+   | x-cloak is the marker for that window; this rule is what makes it work,
+   | and without it the attribute does nothing at all.
+   */
+  [x-cloak] {
+    display: none !important;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: 1.65;
+    color: var(--color-paper-900);
+    background-color: #ffffff;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    color: var(--color-navy-700);
+    font-weight: 600;
+    text-wrap: balance;
+  }
+
+  /* Keyboard focus must always be visible — WCAG 2.1 AA */
+  :focus-visible {
+    outline: 2px solid var(--color-lime-600);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-lime-200);
+    color: var(--color-navy-800);
+  }
+
+  /* Numbers that sit in columns always line up */
+  .tabular, table td, .price {
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Shared container — one gutter definition for the whole site */
+  .wb-container {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 768px) {
+    .wb-container { padding-inline: 1.5rem; }
+  }
+
+  /* Readable measure for running text */
+  .wb-prose { max-width: 68ch; }
+
+  /* News post body - HTML produced by PostFormatter / SafeHtml */
+  .wb-article > * + * { margin-top: 1.25em; }
+  .wb-article h3 {
+    margin-top: 2em;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--color-navy-700);
+  }
+  .wb-article h4 {
+    margin-top: 1.75em;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-navy-700);
+  }
+  .wb-article ul, .wb-article ol { padding-left: 1.4em; }
+  .wb-article ul { list-style: disc; }
+  .wb-article ol { list-style: decimal; }
+  .wb-article li + li { margin-top: 0.4em; }
+  .wb-article li::marker { color: var(--color-lime-600); }
+  .wb-article a {
+    color: var(--color-navy-700);
+    text-decoration: underline;
+    text-decoration-color: var(--color-lime-500);
+    text-underline-offset: 3px;
+    text-decoration-thickness: 2px;
+  }
+  .wb-article a:hover { color: var(--color-lime-700); }
+  .wb-article strong { color: var(--color-navy-800); font-weight: 600; }
+  .wb-article blockquote {
+    border-left: 3px solid var(--color-lime-500);
+    padding: 0.25em 0 0.25em 1.25em;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    color: var(--color-navy-700);
+  }
+
+  /* Skip link — visible only on focus */
+  .wb-skip {
+    position: absolute;
+    left: -9999px;
+    z-index: 100;
+  }
+  .wb-skip:focus {
+    left: 1rem;
+    top: 1rem;
+    padding: 0.75rem 1.25rem;
+    background: var(--color-navy-700);
+    color: #fff;
+    border-radius: var(--radius-xs);
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Motion
+|--------------------------------------------------------------------------
+| Budget from the UX spec: fades and short rises only. No parallax, no
+| counters, no carousels that move on their own. One easing curve, two
+| durations.
+|
+| Safety: the hidden start states apply ONLY to elements that app.js has
+| tagged, and app.js tags them in the same breath as starting the observer
+| that reveals them. If the script never runs, nothing is ever hidden, and
+| the page reads exactly as it does now.
+*/
+
+@layer components {
+
+  /* --- Scroll reveal, for sections below the fold --- */
+  .wb-anim [data-reveal] {
+    opacity: 0;
+    transform: translateY(10px);
+    transition:
+      opacity 500ms var(--ease-brand),
+      transform 500ms var(--ease-brand);
+    will-change: opacity, transform;
+  }
+
+  .wb-anim [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+    will-change: auto;
+  }
+
+  /* --- Hero entrance: one orchestrated moment on load --- */
+  .wb-anim [data-enter] > * {
+    opacity: 0;
+    animation: wb-enter 620ms var(--ease-brand) forwards;
+  }
+
+  /* The copy leads, the illustration follows a beat later. */
+  .wb-anim [data-enter] > *:nth-child(1) { animation-delay: 60ms; }
+  .wb-anim [data-enter] > *:nth-child(2) { animation-delay: 200ms; }
+  .wb-anim [data-enter] > *:nth-child(3) { animation-delay: 300ms; }
+
+  /* --- Navigation underline: grows from the centre --- */
+  .wb-navlink {
+    position: relative;
+  }
+
+  .wb-navlink::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 2px;
+    background: var(--color-lime-500);
+    transform: scaleX(0);
+    transition: transform 180ms var(--ease-brand);
+  }
+
+  .wb-navlink:hover::after,
+  .wb-navlink:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  .wb-navlink[aria-current="page"]::after,
+  .wb-navlink[data-active="true"]::after {
+    transform: scaleX(1);
+  }
+
+  /* --- Press feedback on buttons --- */
+  .wb-press {
+    transition:
+      background-color 150ms var(--ease-brand),
+      color 150ms var(--ease-brand),
+      border-color 150ms var(--ease-brand),
+      transform 100ms var(--ease-brand);
+  }
+
+  .wb-press:active {
+    transform: translateY(1px);
+  }
+
+  /* --- Cards lift very slightly on hover --- */
+  .wb-lift {
+    transition:
+      border-color 180ms var(--ease-brand),
+      transform 180ms var(--ease-brand),
+      box-shadow 180ms var(--ease-brand);
+  }
+
+  .wb-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-header);
+  }
+}
+
+@keyframes wb-enter {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
+@layer components {
+
+  /* --- Staggered children inside a revealed section ---------------------
+     Cards in a row arrive in sequence rather than all at once. The index is
+     set by app.js as a custom property, so the delay is data, not a pile of
+     nth-child rules. */
+  .wb-anim [data-stagger] > * {
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 480ms var(--ease-brand) calc(var(--wb-i, 0) * 70ms),
+      transform 480ms var(--ease-brand) calc(var(--wb-i, 0) * 70ms);
+  }
+
+  .wb-anim [data-reveal].is-visible [data-stagger] > * {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* --- The bridge builds itself ----------------------------------------
+     Drawn in the order a bridge is actually built: deck, towers, main cable,
+     hangers, arc, then the network beneath it comes alive. Roughly 2.4s from
+     first paint, then it rests. Nothing loops except one slow pulse at the
+     hub. */
+
+  .wb-anim .wb-bridge .wb-b-deck {
+    transform: scaleX(0);
+    transform-origin: 50% 50%;
+    transform-box: fill-box;
+    animation: wb-b-grow 700ms var(--ease-brand) 100ms forwards;
+  }
+
+  .wb-anim .wb-bridge .wb-b-tower {
+    transform: scaleY(0);
+    transform-origin: 50% 100%;
+    transform-box: fill-box;
+    animation: wb-b-rise 520ms var(--ease-brand) 560ms forwards;
+  }
+
+  .wb-anim .wb-bridge .wb-b-tower-2 {
+    animation-delay: 680ms;
+  }
+
+  .wb-anim .wb-bridge .wb-b-cable {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: wb-b-draw 1100ms var(--ease-brand) 900ms forwards;
+  }
+
+  .wb-anim .wb-bridge .wb-b-hangers {
+    opacity: 0;
+    animation: wb-b-fade 500ms var(--ease-brand) 1500ms forwards;
+  }
+
+  .wb-anim .wb-bridge .wb-b-hangers-side {
+    animation-delay: 1650ms;
+    --wb-fade-to: 0.4;
+  }
+
+  .wb-anim .wb-bridge .wb-b-arc {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: wb-b-draw 900ms var(--ease-brand) 1400ms forwards;
+  }
+
+  .wb-anim .wb-bridge .wb-b-circuit path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: wb-b-draw 700ms var(--ease-brand) 1900ms forwards;
+  }
+
+  .wb-anim .wb-bridge .wb-b-nodes circle,
+  .wb-anim .wb-bridge .wb-b-hub {
+    opacity: 0;
+    transform: scale(0.4);
+    transform-origin: 50% 50%;
+    transform-box: fill-box;
+    animation: wb-b-pop 380ms var(--ease-brand) 2350ms forwards;
+  }
+
+  .wb-anim .wb-bridge .wb-b-nodes-lime circle {
+    animation-delay: 2500ms;
+  }
+
+  .wb-anim .wb-bridge .wb-b-hub {
+    animation-delay: 2620ms;
+  }
+
+  /* The one looping element on the site: a slow signal at the hub, which is
+     the point of the whole illustration. Four seconds apart, barely there. */
+  .wb-anim .wb-bridge .wb-b-pulse {
+    opacity: 0;
+    transform-origin: 50% 50%;
+    transform-box: fill-box;
+    animation: wb-b-signal 4s var(--ease-brand) 2900ms infinite;
+  }
+
+  /* --- Page transition after an instant (wire:navigate) navigation ------
+     Livewire swaps the body without a reload. Fast, but abrupt: the page
+     changes underneath you with no sense of movement. This is short enough
+     not to feel like waiting and long enough to read as a transition. */
+  .wb-page-in {
+    animation: wb-page-in 260ms var(--ease-brand);
+  }
+
+  /* Livewire's navigation progress bar, in the brand lime rather than its
+     default blue. Only appears when a page takes a moment to arrive. */
+  .wb-navigate-progress-bar {
+    background: var(--color-lime-500) !important;
+  }
+
+  /* --- Header condenses with a little more finish --- */
+  .wb-header-blur {
+    backdrop-filter: saturate(140%) blur(8px);
+  }
+}
+
+@keyframes wb-page-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes wb-b-grow  { to { transform: scaleX(1); } }
+@keyframes wb-b-rise  { to { transform: scaleY(1); } }
+@keyframes wb-b-draw  { to { stroke-dashoffset: 0; } }
+@keyframes wb-b-fade  { to { opacity: var(--wb-fade-to, 0.5); } }
+@keyframes wb-b-pop   { to { opacity: 1; transform: scale(1); } }
+
+@keyframes wb-b-signal {
+  0%        { opacity: 0;    transform: scale(0.7); }
+  12%       { opacity: 0.45; transform: scale(1); }
+  40%, 100% { opacity: 0;    transform: scale(1.5); }
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| QT-style homepage
+|--------------------------------------------------------------------------
+*/
+@layer components {
+
+  /* Nav colour lives here, not in utilities, so the header can flip it to
+     white over the dark hero. */
+  .wb-navlink { color: var(--color-navy-700); }
+  .wb-navlink:hover { color: var(--color-navy-500); }
+  .wb-nav-light .wb-navlink { color: #fff; }
+  .wb-nav-light .wb-navlink:hover { color: var(--color-lime-300); }
+
+  /* --- Hero --- */
+  .wb-hero-shade {
+    background: radial-gradient(ellipse 70% 80% at 20% 60%,
+      rgb(16 24 41 / 0.92) 0%, rgb(16 24 41 / 0.55) 55%, rgb(16 24 41 / 0.15) 100%);
+  }
+
+  .wb-hero-accent {
+    color: var(--color-lime-400);
+    background: linear-gradient(transparent 86%, rgb(137 199 38 / 0.35) 86%);
+  }
+
+  .wb-ping { animation: wb-ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite; }
+  .wb-scroll-dot { animation: wb-scroll 1.8s var(--ease-brand) infinite; }
+
+  /* Hero copy arrives line by line: tagline, headline, paragraph, buttons. */
+  .wb-anim .wb-hero [data-enter] > * {
+    opacity: 1;
+    animation: none;
+  }
+
+  .wb-anim .wb-hero [data-enter] > div > * {
+    opacity: 0;
+    transform: translateY(18px);
+    animation: wb-enter 760ms var(--ease-brand) forwards;
+  }
+
+  .wb-anim .wb-hero [data-enter] > div > *:nth-child(1) { animation-delay: 80ms; }
+  .wb-anim .wb-hero [data-enter] > div > *:nth-child(2) { animation-delay: 220ms; }
+  .wb-anim .wb-hero [data-enter] > div > *:nth-child(3) { animation-delay: 400ms; }
+  .wb-anim .wb-hero [data-enter] > div > *:nth-child(4) { animation-delay: 540ms; }
+
+  /* --- Per-row reveal (solutions showcase) --- */
+  .wb-anim [data-reveal-item] {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 800ms var(--ease-brand),
+      transform 800ms var(--ease-brand);
+  }
+
+  .wb-anim [data-reveal-item].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* --- Mock panels come alive when their row is revealed --- */
+  .wb-mock-bar { width: var(--w); }
+  .wb-mock-col { height: var(--h); }
+
+  .wb-anim [data-reveal-item] .wb-mock-bar {
+    width: 0;
+    transition: width 1200ms var(--ease-brand) 350ms;
+  }
+  .wb-anim [data-reveal-item].is-visible .wb-mock-bar { width: var(--w); }
+
+  .wb-anim [data-reveal-item] .wb-mock-col {
+    height: 4%;
+    transition: height 900ms var(--ease-brand) calc(300ms + var(--i, 0) * 70ms);
+  }
+  .wb-anim [data-reveal-item].is-visible .wb-mock-col { height: var(--h); }
+
+  .wb-anim [data-reveal-item] .wb-mock-row {
+    opacity: 0;
+    transform: translateX(-10px);
+    transition:
+      opacity 500ms var(--ease-brand) calc(300ms + var(--i, 0) * 90ms),
+      transform 500ms var(--ease-brand) calc(300ms + var(--i, 0) * 90ms);
+  }
+  .wb-anim [data-reveal-item].is-visible .wb-mock-row {
+    opacity: 1;
+    transform: none;
+  }
+
+  .wb-anim [data-reveal-item] .wb-mock-link {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 1400ms var(--ease-brand) 300ms;
+  }
+  .wb-anim [data-reveal-item].is-visible .wb-mock-link { stroke-dashoffset: 0; }
+
+  .wb-mock-pulse {
+    transform-origin: 50% 50%;
+    transform-box: fill-box;
+    animation: wb-mock-pulse 2.4s var(--ease-brand) infinite;
+  }
+
+  /* --- Technology strip --- */
+  .wb-marquee {
+    mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  }
+  .wb-marquee-track { animation: wb-marquee 42s linear infinite; }
+  .wb-marquee:hover .wb-marquee-track { animation-play-state: paused; }
+
+  /* --- About --- */
+  .wb-float { animation: wb-float 5s ease-in-out infinite; }
+
+  /* --- Sector cards: a lime glow follows the cursor --- */
+  .wb-industry-glow {
+    background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%),
+      rgb(137 199 38 / 0.16), transparent 60%);
+    opacity: 0;
+    transition: opacity 300ms var(--ease-brand);
+  }
+  .wb-industry:hover .wb-industry-glow { opacity: 1; }
+
+  /* --- Footer links nudge on hover --- */
+  .wb-footer-link svg { transition: transform 200ms var(--ease-brand); }
+  .wb-footer-link:hover svg { transform: translateX(3px); }
+}
+
+@keyframes wb-ping       { 75%, 100% { transform: scale(2.2); opacity: 0; } }
+@keyframes wb-scroll     { 0% { transform: translateY(0); opacity: 1; } 70% { transform: translateY(10px); opacity: 0; } 100% { opacity: 0; } }
+@keyframes wb-marquee    { to { transform: translateX(-50%); } }
+@keyframes wb-float      { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+/* CCTV panel: recording dot and a slow scan line */
+.wb-rec-dot { animation: wb-rec 1.4s steps(2, jump-none) infinite; }
+.wb-scan { top: -20%; animation: wb-scan 3.5s linear infinite; }
+@keyframes wb-rec { 50% { opacity: 0.2; } }
+@keyframes wb-scan { to { top: 110%; } }
+@media (prefers-reduced-motion: reduce) { .wb-rec-dot, .wb-scan { animation: none; } }
+
+@keyframes wb-mock-pulse { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(2); opacity: 0; } }
+
+/*
+| Someone who has asked their system for less motion gets none of it, and
+| every element sits at its finished state immediately.
+*/
+@media (prefers-reduced-motion: reduce) {
+  .wb-anim [data-reveal],
+  .wb-anim [data-enter] > *,
+  .wb-anim [data-stagger] > * {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* The bridge shows its finished state - no drawing, no pulse. */
+  .wb-anim .wb-bridge * {
+    animation: none !important;
+    opacity: revert !important;
+    transform: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+
+  .wb-anim .wb-bridge .wb-b-pulse {
+    opacity: 0.45 !important;
+  }
+
+  .wb-page-in {
+    animation: none !important;
+  }
+
+  .wb-navlink::after,
+  .wb-press,
+  .wb-lift {
+    transition: none !important;
+  }
+
+  .wb-lift:hover {
+    transform: none !important;
+  }
+
+  /* QT-style homepage */
+  .wb-anim .wb-hero [data-enter] > div > *,
+  .wb-anim [data-reveal-item],
+  .wb-anim [data-reveal-item] .wb-mock-row {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+  .wb-anim [data-reveal-item] .wb-mock-bar { width: var(--w) !important; transition: none !important; }
+  .wb-anim [data-reveal-item] .wb-mock-col { height: var(--h) !important; transition: none !important; }
+  .wb-anim [data-reveal-item] .wb-mock-link { stroke-dashoffset: 0 !important; transition: none !important; }
+  .wb-ping, .wb-scroll-dot, .wb-marquee-track, .wb-float, .wb-mock-pulse { animation: none !important; }
+}
